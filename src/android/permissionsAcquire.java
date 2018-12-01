@@ -24,6 +24,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.content.pm.PackageManager;
+import android.content.ComponentName;
 
 import static android.net.ConnectivityManager.RESTRICT_BACKGROUND_STATUS_DISABLED;
 import static android.net.ConnectivityManager.RESTRICT_BACKGROUND_STATUS_ENABLED;
