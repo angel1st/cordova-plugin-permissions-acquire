@@ -36,6 +36,33 @@ import android.widget.Toast;// ToToast
 public class permissionsAcquire extends CordovaPlugin {
     private static final int REQUEST_BATTERY_OPTIMIZATIONS = 1;
     private CallbackContext PUBLIC_CALLBACKS = null;
+    private static final Intent[] POWERMANAGER_INTENTS = {
+            new Intent().setComponent(new ComponentName("com.miui.securitycenter",
+                    "com.miui.permcenter.autostart.AutoStartManagementActivity")),
+            new Intent().setComponent(
+                    new ComponentName("com.letv.android.letvsafe", "com.letv.android.letvsafe.AutobootManageActivity")),
+            new Intent().setComponent(new ComponentName("com.huawei.systemmanager",
+                    "com.huawei.systemmanager.optimize.process.ProtectActivity")),
+            new Intent().setComponent(new ComponentName("com.huawei.systemmanager",
+                    "com.huawei.systemmanager.appcontrol.activity.StartupAppControlActivity")),
+            new Intent().setComponent(new ComponentName("com.coloros.safecenter",
+                    "com.coloros.safecenter.permission.startup.StartupAppListActivity")),
+            new Intent().setComponent(new ComponentName("com.coloros.safecenter",
+                    "com.coloros.safecenter.startupapp.StartupAppListActivity")),
+            new Intent().setComponent(
+                    new ComponentName("com.oppo.safe", "com.oppo.safe.permission.startup.StartupAppListActivity")),
+            new Intent().setComponent(
+                    new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity")),
+            new Intent().setComponent(
+                    new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager")),
+            new Intent().setComponent(new ComponentName("com.vivo.permissionmanager",
+                    "com.vivo.permissionmanager.activity.BgStartUpManagerActivity")),
+            new Intent().setComponent(
+                    new ComponentName("com.samsung.android.lool", "com.samsung.android.sm.ui.battery.BatteryActivity")),
+            new Intent().setComponent(
+                    new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity")),
+            new Intent()
+                    .setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.MainActivity")) };
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -72,13 +99,18 @@ public class permissionsAcquire extends CordovaPlugin {
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
 
                     String message = "Optimizations Requested Successfully";
-
-                    Intent intent = new Intent();
-                    intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-                    // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setData(Uri.parse("package:" + packageName));
-                    cordova.setActivityResultCallback(this);
-                    cordova.startActivityForResult((CordovaPlugin) this, intent, REQUEST_BATTERY_OPTIMIZATIONS);
+                    /*
+                     * Intent intent = new Intent();
+                     * intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS); //
+                     * intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                     */
+                    for (Intent intent : POWERMANAGER_INTENTS)
+                        if (getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+                            intent.setData(Uri.parse("package:" + packageName));
+                            cordova.setActivityResultCallback(this);
+                            cordova.startActivityForResult((CordovaPlugin) this, intent, REQUEST_BATTERY_OPTIMIZATIONS);
+                            break;
+                        }
 
                     // Send no result, to execute the callbacks later
                     PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
@@ -180,7 +212,8 @@ public class permissionsAcquire extends CordovaPlugin {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         if (requestCode == REQUEST_BATTERY_OPTIMIZATIONS) {
-            String res = "Activity Results: requestCode = " + String.valueOf(requestCode) + " resultCode = " + String.valueOf(resultCode);
+            String res = "Activity Results: requestCode = " + String.valueOf(requestCode) + " resultCode = "
+                    + String.valueOf(resultCode);
             PluginResult resultado = new PluginResult(PluginResult.Status.OK, res);
             resultado.setKeepCallback(true);
             PUBLIC_CALLBACKS.sendPluginResult(resultado);
