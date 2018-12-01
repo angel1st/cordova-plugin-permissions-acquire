@@ -180,7 +180,8 @@ public class permissionsAcquire extends CordovaPlugin {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         if (requestCode == REQUEST_BATTERY_OPTIMIZATIONS) {
-            PluginResult resultado = new PluginResult(PluginResult.Status.OK, ((resultCode == 1) ? "true" : "false"));
+            String res = "Activity Results: requestCode = " + String.valueOf(requestCode) + " resultCode = " + String.valueOf(resultCode);
+            PluginResult resultado = new PluginResult(PluginResult.Status.OK, res);
             resultado.setKeepCallback(true);
             PUBLIC_CALLBACKS.sendPluginResult(resultado);
         }
