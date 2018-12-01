@@ -8,13 +8,13 @@
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="permissionsAcquire">
-                <param name="android-package" value="cordova-plugin-permissions-acquire.permissionsAcquire"/>
+                <param name="android-package" value="cordova.plugins.permissionsAcquire.permissionsAcquire"/>
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
         </config-file>
 
-        <source-file src="src/android/permissionsAcquire.java" target-dir="src/cordova/plugins/cordova-plugin-permissions-acquire/permissionsAcquire"/>
+        <source-file src="src/android/permissionsAcquire.java" target-dir="src/cordova/plugins/permissionsAcquire/permissionsAcquire"/>
     </platform>
 </plugin>
