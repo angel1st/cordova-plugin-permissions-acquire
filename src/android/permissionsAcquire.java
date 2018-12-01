@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.content.pm.PackageManager;
 
 import static android.net.ConnectivityManager.RESTRICT_BACKGROUND_STATUS_DISABLED;
 import static android.net.ConnectivityManager.RESTRICT_BACKGROUND_STATUS_ENABLED;
@@ -105,7 +106,7 @@ public class permissionsAcquire extends CordovaPlugin {
                      * intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                      */
                     for (Intent intent : POWERMANAGER_INTENTS)
-                        if (getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+                        if (cordova.getActivity().getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
                             intent.setData(Uri.parse("package:" + packageName));
                             cordova.setActivityResultCallback(this);
                             cordova.startActivityForResult((CordovaPlugin) this, intent, REQUEST_BATTERY_OPTIMIZATIONS);
