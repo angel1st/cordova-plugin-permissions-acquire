@@ -15,6 +15,6 @@
             <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
         </config-file>
 
-        <source-file src="src/android/permissionsAcquire.java" target-dir="src/cordova/plugins/permissionsAcquire/permissionsAcquire"/>
+        <source-file src="src/android/permissionsAcquire.java" target-dir="src/cordova/plugins/cordova-plugin-permissions-acquire/permissionsAcquire"/>
     </platform>
 </plugin>
