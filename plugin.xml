@@ -2,19 +2,19 @@
 <plugin id="cordova-plugin-permissions-acquire" version="0.1.3" xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <name>DozeOptimize</name>
-    <js-module name="DozeOptimize" src="www/DozeOptimize.js">
+    <js-module name="permissionsAcquire" src="www/permissionsAcquire.js">
         <clobbers target="cordova.plugins.permissionsAcquire"/>
     </js-module>
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="DozeOptimize">
-                <param name="android-package" value="cordova-plugin-permissions-acquire.DozeOptimize"/>
+            <feature name="permissionsAcquire">
+                <param name="android-package" value="cordova-plugin-permissions-acquire.permissionsAcquire"/>
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
         </config-file>
 
-        <source-file src="src/android/DozeOptimize.java" target-dir="src/cordova/plugins/permissionsAcquire/DozeOptimize"/>
+        <source-file src="src/android/permissionsAcquire.java" target-dir="src/cordova/plugins/permissionsAcquire/permissionsAcquire"/>
     </platform>
 </plugin>

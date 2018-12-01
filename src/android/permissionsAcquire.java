@@ -1,4 +1,4 @@
-package cordova.plugins.DozeOptimize;
+package cordova.plugins.permissionsAcquire;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -33,7 +33,7 @@ import android.widget.Toast;// ToToast
 /**
  * This class echoes a string called from JavaScript.
  */
-public class DozeOptimize extends CordovaPlugin {
+public class permissionsAcquire extends CordovaPlugin {
     private static final int REQUEST_BATTERY_OPTIMIZATIONS = 1;
     private CallbackContext PUBLIC_CALLBACKS = null;
 
